@@ -5,7 +5,10 @@
 <!--                                                                        -->
 <!-- OpenPOWER HostBoot Project                                             -->
 <!--                                                                        -->
-<!-- COPYRIGHT International Business Machines Corp. 2012,2014              -->
+<!-- Contributors Listed Below - COPYRIGHT 2012,2014                        -->
+<!-- [+] <joel@jms.id.au                                                    -->
+<!-- [+] International Business Machines Corp.                              -->
+<!--                                                                        -->
 <!--                                                                        -->
 <!-- Licensed under the Apache License, Version 2.0 (the "License");        -->
 <!-- you may not use this file except in compliance with the License.       -->
@@ -145,10 +148,17 @@ Layout Description
         <ecc/>
     </section>
     <section>
-        <description>Payload (22.5MB)</description>
+        <description>Payload (4MB)</description>
         <eyeCatch>PAYLOAD</eyeCatch>
         <physicalOffset>0xC75000</physicalOffset>
-        <physicalRegionSize>0x1680000</physicalRegionSize>
+        <physicalRegionSize>0x400000</physicalRegionSize>
+        <ecc/>
+    </section>
+    <section>
+        <description>Petitboot Payload (18.5MB)</description>
+        <eyeCatch>PETITBOOT</eyeCatch>
+        <physicalOffset>0x1075000</physicalOffset>
+        <physicalRegionSize>0x1280000</physicalRegionSize>
         <ecc/>
     </section>
     <section>
