@@ -6,6 +6,7 @@
 <!-- OpenPOWER HostBoot Project                                             -->
 <!--                                                                        -->
 <!-- Contributors Listed Below - COPYRIGHT 2012,2014                        -->
+<!-- [+] <joel@jms.id.au                                                    -->
 <!-- [+] International Business Machines Corp.                              -->
 <!--                                                                        -->
 <!--                                                                        -->
@@ -2275,6 +2276,80 @@
     <readable/>
     <writeable/>
     <hasStringConversion/>
+</attribute>
+
+<enumerationType>
+    <id>CONSOLE_KIND</id>
+    <description>
+        Enumeration indicating what kind of console is used on the system for debug output.
+    </description>
+    <enumerator>
+        <name>NONE</name>
+        <value>0</value>
+    </enumerator>
+    <enumerator>
+        <name>FSP</name>
+        <value>1</value>
+    </enumerator>
+    <enumerator>
+        <name>UART</name>
+        <value>2</value>
+    </enumerator>
+    <default>NONE</default>
+</enumerationType>
+
+<attribute>
+    <id>CONSOLE_KIND</id>
+    <description>
+        Attribute indicating what kind of console is used on the system for debug output.
+    </description>
+    <simpleType>
+        <enumeration>
+            <id>CONSOLE_KIND</id>
+        </enumeration>
+    </simpleType>
+    <persistency>volatile</persistency>
+    <readable/>
+    <hasStringConversion/>
+</attribute>
+
+<attribute>
+    <id>CONSOLE_UART_BASE</id>
+    <description>Base I/O address of the console UART.</description>
+    <simpleType>
+        <uint64_t>
+            <default>0x3f8</default>
+        </uint64_t>
+    </simpleType>
+    <persistency>volatile</persistency>
+    <readable/>
+    <writeable/>
+</attribute>
+
+<attribute>
+    <id>CONSOLE_UART_BAUD_RATE</id>
+    <description>Baud rate of console UART in HZ.</description>
+    <simpleType>
+        <uint64_t>
+            <default>115200</default>
+        </uint64_t>
+    </simpleType>
+    <persistency>volatile</persistency>
+    <readable/>
+    <writeable/>
+</attribute>
+
+<attribute>
+    <id>LPC_DEBUG_PORT</id>
+    <description>LPC debug output I/O port.</description>
+    <simpleType>
+        <uint64_t>
+            <default>0x00</default>
+        </uint64_t>
+    </simpleType>
+    <persistency>volatile</persistency>
+    <readable/>
+    <writeable/>
 </attribute>
 
 <attribute>

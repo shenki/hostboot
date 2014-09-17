@@ -5,7 +5,10 @@
 /*                                                                        */
 /* OpenPOWER HostBoot Project                                             */
 /*                                                                        */
-/* COPYRIGHT International Business Machines Corp. 2013,2014              */
+/* Contributors Listed Below - COPYRIGHT 2013,2014                        */
+/* [+] International Business Machines Corp.                              */
+/* [+] <joel@jms.id.au                                                    */
+/*                                                                        */
 /*                                                                        */
 /* Licensed under the Apache License, Version 2.0 (the "License");        */
 /* you may not use this file except in compliance with the License.       */
@@ -43,6 +46,16 @@ namespace TRACE
     {
         // No need to destruct the service.
         assert(0);
+    }
+
+    void Service::writeConsole(ComponentDesc* i_td,
+                               const char * i_fmt,
+                               uint32_t i_line,
+                               uint32_t i_type,
+                               va_list i_args)
+    {
+
+        // brs skip for now
     }
 
     void Service::writeEntry(ComponentDesc* i_td,

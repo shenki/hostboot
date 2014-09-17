@@ -5,7 +5,10 @@
 /*                                                                        */
 /* OpenPOWER HostBoot Project                                             */
 /*                                                                        */
-/* COPYRIGHT International Business Machines Corp. 2012,2014              */
+/* Contributors Listed Below - COPYRIGHT 2012,2014                        */
+/* [+] International Business Machines Corp.                              */
+/* [+] <joel@jms.id.au                                                    */
+/*                                                                        */
 /*                                                                        */
 /* Licensed under the Apache License, Version 2.0 (the "License");        */
 /* you may not use this file except in compliance with the License.       */
@@ -27,6 +30,7 @@
 #include "daemonif.H"
 #include "debug.H"
 
+#include <usr/trace/trace.H>
 #include <sys/time.h>
 #include <sys/task.h>
 #include <util/align.H>
@@ -34,6 +38,13 @@
 #include <util/singleton.H>
 #include <assert.h>
 #include <time.h>
+
+#include <console/consoleif.H>
+#include <stdio.h>
+
+// This is a build-time setting to allow tracing to console before
+// targeting is initialized.
+uint32_t TRACE_TO_CONSOLE = 0;
 
 namespace TRACE
 {
@@ -49,6 +60,58 @@ namespace TRACE
     {
         // No need to destruct the service.
         assert(0);
+    }
+
+    void Service::writeConsole(ComponentDesc* i_td,
+                               const char * i_fmt,
+                               uint32_t i_line,
+                               uint32_t i_type,
+                               va_list i_args)
+    {
+        if( TRACE_TO_CONSOLE && i_fmt != NULL )
+        {
+            // Skip writing trace if debug is disabled.
+            if (unlikely(i_type == TRACE_DEBUG))
+                {
+                    if ((!i_td->iv_debugEnabled) &&
+                        (!g_debugSettings.globalDebugEnable))
+                        {
+                            return;
+                        }
+                }
+
+            // Format as string for printing to console.
+            char data[CONSOLE_MAX_STRING_LENGTH] = { 0 };
+            va_list l_args;
+
+            va_copy(l_args, i_args);
+            vsprintf( data, i_fmt, l_args );
+            va_end(l_args);
+
+            // brs - it doesnt' appear that we can get the original __FILE__
+            // by the time we're here without passing it in. So for now just
+            // nuke TRACEPP_INSERT_FILENAME if found and we'll figure context
+            // from the rest of the data in the trace.
+            // Note: we're assuing the marker is the beginning of the data,
+            // so memcmp works here. We probably don't want to be stripping
+            // the marker string if it's not the first substring anyway ...
+            const char* tracepp_marker = "TRACEPP_INSERT_FILENAME";
+            ssize_t offset = 0;
+            if (memcmp(tracepp_marker, data, strlen(tracepp_marker)) == 0)
+            {
+                offset = strlen(tracepp_marker);
+            }
+
+            timespec_t curTime;
+            clock_gettime( CLOCK_MONOTONIC, &curTime );
+
+            uint64_t ms = curTime.tv_nsec / 1000000;
+            CONSOLE::printf( "[%ld.%s%s%ld] |%s|%d| %s\n",
+                             curTime.tv_sec,
+                             (ms < 100) ? "0" : "", (ms < 10) ? "0" : "", ms,
+                             i_td->iv_compName,
+                             i_line, &data[offset] );
+        }
     }
 
     void Service::writeEntry(ComponentDesc* i_td,

@@ -6,8 +6,9 @@
 /* OpenPOWER HostBoot Project                                             */
 /*                                                                        */
 /* Contributors Listed Below - COPYRIGHT 2011,2014                        */
-/* [+] Google Inc.                                                        */
+/* [+] <joel@jms.id.au                                                    */
 /* [+] International Business Machines Corp.                              */
+/* [+] Google Inc.                                                        */
 /*                                                                        */
 /*                                                                        */
 /* Licensed under the Apache License, Version 2.0 (the "License");        */
@@ -58,6 +59,8 @@ namespace DeviceFW
         SCAN,
         EEPROM,
         GPIO,
+        LPC,
+        CONSOLE,
         LAST_ACCESS_TYPE,
     };
 
@@ -140,6 +143,16 @@ namespace DeviceFW
         DeviceFW::SCAN, static_cast<uint64_t>(( i_ring )),\
             static_cast<uint64_t>(( i_ringlen )),\
             static_cast<uint64_t>(( i_flag ))
+
+    /**
+     * Construct the device addressing parameters for the LPC device ops.
+     * @param[in] i_trans_type - LPC transaction type.
+     * @param[in] i_address - LPC address to operate on.
+     *     Flag options are located in: src/include/usr/lpc/lpcif.H
+     */
+    #define DEVICE_LPC_ADDRESS( i_trans_type, i_address )\
+        DeviceFW::LPC, static_cast<uint64_t>(( i_trans_type )),\
+            static_cast<uint64_t>(( i_address ))
 
     /**
      * Construct the device addressing parameters for the EEPROM device ops.

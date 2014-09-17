@@ -6,8 +6,9 @@
 # OpenPOWER HostBoot Project
 #
 # Contributors Listed Below - COPYRIGHT 2010,2014
-# [+] Google Inc.
 # [+] International Business Machines Corp.
+# [+] Google Inc.
+# [+] <joel@jms.id.au
 #
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -112,6 +113,8 @@ BASE_MODULES += initservice
 BASE_MODULES += secureboot_base
 BASE_MODULES += pnor
 BASE_MODULES += vfs
+BASE_MODULES += console
+BASE_MODULES += lpc
 
 EXTENDED_MODULES += targeting
 EXTENDED_MODULES += ecmddatabuffer

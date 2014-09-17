@@ -7,8 +7,9 @@
 # OpenPOWER HostBoot Project
 #
 # Contributors Listed Below - COPYRIGHT 2013,2014
-# [+] Google Inc.
 # [+] International Business Machines Corp.
+# [+] Google Inc.
+# [+] <joel@jms.id.au
 #
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -203,6 +204,7 @@ my %resident_modules = (
     "libmdia.so"           => '1',
     "libattn.so"           => '1',
     "libi2c.so"            => '1',
+    "liblpc.so"            => '1',
     "libutil.so"           => '1',
     "libibscom.so"         => '1',
     "libfsiscom.so"        => '1',
@@ -404,5 +406,3 @@ sub usage
 
     exit 0;
 }
-
-
