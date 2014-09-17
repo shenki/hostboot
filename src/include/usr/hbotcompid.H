@@ -6,8 +6,9 @@
 /* OpenPOWER HostBoot Project                                             */
 /*                                                                        */
 /* Contributors Listed Below - COPYRIGHT 2011,2014                        */
-/* [+] Google Inc.                                                        */
 /* [+] International Business Machines Corp.                              */
+/* [+] Google Inc.                                                        */
+/* [+] <joel@jms.id.au                                                    */
 /*                                                                        */
 /*                                                                        */
 /* Licensed under the Apache License, Version 2.0 (the "License");        */
@@ -317,6 +318,15 @@ const char DEVTREE_COMP_NAME[] = "devtree";
 const compId_t SBE_COMP_ID = 0x2200;
 const char SBE_COMP_NAME[] = "sbe";
 //@}
+
+/** @name LPC
+ * Low Pin Count Bus
+ */
+//@{
+const compId_t LPC_COMP_ID = 0x4000;
+const char LPC_COMP_NAME[] = "lpc";
+//@}
+
 
 /** @name GPIO
  * General Purpose IO device

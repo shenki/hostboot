@@ -6,6 +6,7 @@
 /* OpenPOWER HostBoot Project                                             */
 /*                                                                        */
 /* Contributors Listed Below - COPYRIGHT 2011,2014                        */
+/* [+] <joel@jms.id.au                                                    */
 /* [+] Google Inc.                                                        */
 /* [+] International Business Machines Corp.                              */
 /*                                                                        */
@@ -65,6 +66,18 @@ const TaskInfo g_exttaskinfolist[]   =   {
             {
                 START_TASK,                         // task type
                 EXT_IMAGE,                          // Extended Module
+            }
+        },
+
+        /**
+         * @brief  SP-less console
+         */
+        {
+            "libconsole.so",                            // taskname
+            NULL,                                       // no ptr to fnct
+            {
+                START_TASK,                             // task type
+                BASE_IMAGE,                             // Base Module
             }
         },
 

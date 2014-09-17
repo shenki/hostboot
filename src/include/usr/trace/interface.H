@@ -6,6 +6,7 @@
 /* OpenPOWER HostBoot Project                                             */
 /*                                                                        */
 /* Contributors Listed Below - COPYRIGHT 2011,2014                        */
+/* [+] <joel@jms.id.au                                                    */
 /* [+] International Business Machines Corp.                              */
 /*                                                                        */
 /*                                                                        */
@@ -140,6 +141,7 @@ const uint32_t TRACE_FIELD   = 0;       //Indicates trace is field
         __TRACE_HASH_STRUCTURES(printf_string); \
         TRACE::trace_adal_write_all((des), \
                                     &__traceData_codeInfo, \
+                                    printf_string,         \
                                     __LINE__, \
                                     TRACE_DEBUG, \
                                     ##args); \
@@ -196,6 +198,7 @@ const uint32_t TRACE_FIELD   = 0;       //Indicates trace is field
         __TRACE_HASH_STRUCTURES(printf_string); \
         TRACE::trace_adal_write_all((des), \
                                     &__traceData_codeInfo, \
+                                    printf_string,         \
                                     __LINE__, \
                                     TRACE_FIELD, \
                                     ##args); \
@@ -252,6 +255,7 @@ tracepp replaces trace_adal_hash() with hash value and reduced format string
         __TRACE_HASH_STRUCTURES(printf_string); \
         TRACE::trace_adal_write_all((des), \
                                     &__traceData_codeInfo, \
+                                    printf_string,         \
                                     __LINE__, \
                                     TRACE_DEBUG, \
                                     ##args); \

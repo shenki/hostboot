@@ -8,6 +8,7 @@
 # Contributors Listed Below - COPYRIGHT 2010,2014
 # [+] Google Inc.
 # [+] International Business Machines Corp.
+# [+] <joel@jms.id.au
 #
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -60,5 +61,8 @@ SUBDIRS += secureboot.d
 SUBDIRS += devtree.d
 SUBDIRS += sbe.d
 SUBDIRS += gpio.d
+
+SUBDIRS += console.d lpc.d
+
 
 include ${ROOTPATH}/config.mk

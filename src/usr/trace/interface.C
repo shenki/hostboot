@@ -5,7 +5,10 @@
 /*                                                                        */
 /* OpenPOWER HostBoot Project                                             */
 /*                                                                        */
-/* COPYRIGHT International Business Machines Corp. 2012,2014              */
+/* Contributors Listed Below - COPYRIGHT 2012,2014                        */
+/* [+] <joel@jms.id.au                                                    */
+/* [+] International Business Machines Corp.                              */
+/*                                                                        */
 /*                                                                        */
 /* Licensed under the Apache License, Version 2.0 (the "License");        */
 /* you may not use this file except in compliance with the License.       */
@@ -70,15 +73,27 @@ namespace TRACE
 
     void trace_adal_write_all(ComponentDesc * io_td,
                               const traceCodeInfo* i_info,
+                              const char* i_printf_string,
                               const uint32_t i_line,
                               const uint32_t i_type, ...)
     {
         va_list args;
+        va_list tmp_args;
+
         va_start(args, i_type);
+
+        va_copy(tmp_args, args);
+        Singleton<Service>::instance().writeConsole(io_td,
+                                                    i_printf_string, i_line,
+                                                    i_type, tmp_args);
+        va_end(tmp_args);
+
+        va_copy(tmp_args, args);
 
         Singleton<Service>::instance().writeEntry(io_td,
                                                   i_info->hash, i_info->format,
-                                                  i_line, i_type, args);
+                                                  i_line, i_type, tmp_args);
+        va_end(tmp_args);
 
         va_end(args);
     }

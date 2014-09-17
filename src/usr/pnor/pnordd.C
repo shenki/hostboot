@@ -6,6 +6,7 @@
 /* OpenPOWER HostBoot Project                                             */
 /*                                                                        */
 /* Contributors Listed Below - COPYRIGHT 2011,2014                        */
+/* [+] <joel@jms.id.au                                                    */
 /* [+] Google Inc.                                                        */
 /* [+] International Business Machines Corp.                              */
 /*                                                                        */
@@ -50,6 +51,9 @@
 #include <util/align.H>
 #include <config.h>
 
+namespace LPC {
+    extern mutex_t cv_mutex;
+};
 
 extern trace_desc_t* g_trac_pnor;
 
@@ -1634,6 +1638,10 @@ errlHndl_t PnorDD::readLPC(uint32_t i_addr,
         // always read/write 64 bits to SCOM
         size_t scom_size = sizeof(uint64_t);
 
+        // brs protect LPC accesses from the LPC code used by the
+        // console, for now. Don't trace in here - that's a deadlock
+        mutex_lock(&LPC::cv_mutex);
+
         // write command register with LPC address to read
         ControlReg_t eccb_cmd;
         eccb_cmd.read_op = 1;
@@ -1643,7 +1651,11 @@ errlHndl_t PnorDD::readLPC(uint32_t i_addr,
                           &(eccb_cmd.data64),
                           scom_size,
                           DEVICE_SCOM_ADDRESS(ECCB_CTL_REG) );
-        if( l_err ) { break; }
+        if( l_err )
+        {
+            mutex_unlock(&LPC::cv_mutex);
+            break;
+        }
 
         // poll for complete and get the data back
         StatusReg_t eccb_stat;
@@ -1671,6 +1683,11 @@ errlHndl_t PnorDD::readLPC(uint32_t i_addr,
             //nanosleep( 0, ECCB_POLL_INCR_NS*(++loop) );
             poll_time += ECCB_POLL_INCR_NS*loop;
         }
+
+        // brs we're done with the mutex here regardless. Any timeouts will want
+        // to trace, and the callouts want to access the LPC to get registers.
+        mutex_unlock(&LPC::cv_mutex);
+
         if( l_err ) { break; }
 
         // check for errors or timeout

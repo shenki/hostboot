@@ -5,7 +5,10 @@
 /*                                                                        */
 /* OpenPOWER HostBoot Project                                             */
 /*                                                                        */
-/* COPYRIGHT International Business Machines Corp. 2012,2014              */
+/* Contributors Listed Below - COPYRIGHT 2012,2014                        */
+/* [+] International Business Machines Corp.                              */
+/* [+] <joel@jms.id.au                                                    */
+/*                                                                        */
 /*                                                                        */
 /* Licensed under the Apache License, Version 2.0 (the "License");        */
 /* you may not use this file except in compliance with the License.       */
@@ -83,6 +86,22 @@ namespace TRACE
             Service();
             /** Default destructor */
             ~Service();
+
+            /** @brief Write a normal entry to the console
+             *
+             *  @param[in] i_td - Component Descriptor to write to.
+             *
+             *  @param[in] i_fmt - Printf-style format string.
+             *  @param[in] i_line - Line number.
+             *  @param[in] i_type - TRACE_DEBUG / TRACE_FIELD
+             *
+             *  @param[in] i_args - Arguments corresponding to i_fmt.
+             */
+            void writeConsole(ComponentDesc* i_td,
+                              const char * i_fmt,
+                              uint32_t i_line,
+                              uint32_t i_type,
+                              va_list i_args);
 
             /** @brief Write a normal entry to a trace buffer.
              *
