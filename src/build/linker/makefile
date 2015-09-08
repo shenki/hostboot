@@ -5,7 +5,8 @@
 #
 # OpenPOWER HostBoot Project
 #
-# Contributors Listed Below - COPYRIGHT 2011,2014
+# Contributors Listed Below - COPYRIGHT 2011,2015
+# [+] <joel@jms.id.au
 # [+] International Business Machines Corp.
 #
 #
@@ -27,7 +28,7 @@ ROOTPATH = ../../..
 ifdef HOST_BINUTILS_DIR
 BFD_CFLAGS = -I$(HOST_BINUTILS_DIR)/bfd/ -I$(HOST_BINUTILS_DIR)/include/
 BFD_LDFLAGS = $(HOST_BINUTILS_DIR)/bfd/libbfd.a \
-	      $(HOST_BINUTILS_DIR)/libiberty/libiberty.a -lz
+	      $(HOST_BINUTILS_DIR)/libiberty/libiberty.a -lz -ldl
 else
 BFD_LDFLAGS = -lbfd -liberty -lz
 endif
