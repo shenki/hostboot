@@ -5,7 +5,7 @@
 /*                                                                        */
 /* OpenPOWER HostBoot Project                                             */
 /*                                                                        */
-/* Contributors Listed Below - COPYRIGHT 2014                             */
+/* Contributors Listed Below - COPYRIGHT 2014,2018                        */
 /* [+] Google Inc.                                                        */
 /* [+] International Business Machines Corp.                              */
 /*                                                                        */
@@ -43,7 +43,6 @@ enum TransType {
     TRANS_ABS, // Address parm is absolute
     TRANS_LAST //Invalid, used for looping and tests
 };
-
 
 /**
  * @brief Create/delete software objects to support non-master access

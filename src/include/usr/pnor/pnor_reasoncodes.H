@@ -5,7 +5,7 @@
 /*                                                                        */
 /* OpenPOWER HostBoot Project                                             */
 /*                                                                        */
-/* Contributors Listed Below - COPYRIGHT 2011,2016                        */
+/* Contributors Listed Below - COPYRIGHT 2011,2018                        */
 /* [+] Google Inc.                                                        */
 /* [+] International Business Machines Corp.                              */
 /*                                                                        */
@@ -106,6 +106,9 @@ namespace PNOR
         MOD_PNORRP_LOADSECURESECTION    = 0xD6, /**< PnorRP::loadSecureSection */
         MOD_SPNORRP_BASE_EXT_VER_CHK    = 0xD7, /**< SPnorRP::baseExtVersCheck */
         MOD_SPNORRP_KEY_TRAN_CHK        = 0xD8, /**< SPnorRP::keyTransitionCheck */
+
+        // ast_mboxdd.C
+        MOD_ASTMBOXDD_DO_MESSAGE        = 0xE0, /**< astMbox::doMessage */
     };
 
     enum PNORReasonCode
@@ -167,6 +170,12 @@ namespace PNOR
         RC_BASE_EXT_MISMATCH         = PNOR_COMP_ID | 0x2C,
         RC_KEY_TRAN_FLAG_UNSET       = PNOR_COMP_ID | 0x2D,
         RC_BAD_SECURE_MAGIC_NUM      = PNOR_COMP_ID | 0x2E,
+        RC_NULL_TOC_BUFFER           = PNOR_COMP_ID | 0x2F,
+        RC_TOC_HDR_CHECKSUM_ERR      = PNOR_COMP_ID | 0x30,
+        RC_PNOR_PARSE_ENTRIES_ERR    = PNOR_COMP_ID | 0x31,
+        RC_PNOR_SET_VADDR_FAILED     = PNOR_COMP_ID | 0x32,
+        RC_MBOX_BAD_SEQUENCE         = PNOR_COMP_ID | 0x33,
+        RC_MBOX_ERROR_STATUS         = PNOR_COMP_ID | 0x34,
 
         //@fixme-RTC:131607-Temporary value to allow HWSV compile
         //termination_rc
